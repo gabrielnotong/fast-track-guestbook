@@ -47,7 +47,7 @@ class Conference
 
     public function __toString(): string
     {
-        return $this->getCity() . ' - ' . $this->getYear();
+        return $this->getCity() . ' ' . $this->getYear();
     }
 
     public function getId(): ?int
