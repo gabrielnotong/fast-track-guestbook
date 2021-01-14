@@ -18,22 +18,22 @@ class Conference
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $city;
+    private ?string $city = null;
 
     /**
      * @ORM\Column(type="string", length=4)
      */
-    private string $year;
+    private ?string $year = null;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isInternational;
+    private ?bool $isInternational;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="conference", orphanRemoval=true)
@@ -45,12 +45,17 @@ class Conference
         $this->comments = new ArrayCollection();
     }
 
-    public function getId(): int
+    public function __toString(): string
+    {
+        return $this->getCity() . ' - ' . $this->getYear();
+    }
+
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -62,7 +67,7 @@ class Conference
         return $this;
     }
 
-    public function getYear(): string
+    public function getYear(): ?string
     {
         return $this->year;
     }
