@@ -52,7 +52,7 @@ class Comment
 
     public function __toString(): string
     {
-        return $this->getText();
+        return $this->getEmail();
     }
 
     public function getId(): int
