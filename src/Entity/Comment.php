@@ -50,6 +50,11 @@ class Comment
      */
     private ?string $photoFilename;
 
+    public function __toString(): string
+    {
+        return $this->getText();
+    }
+
     public function getId(): int
     {
         return $this->id;
