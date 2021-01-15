@@ -23,7 +23,6 @@ easy_admin:
             edit:
                 fields:
                     - { property: conference }
-                    - { property: createdAt, type: datetime, type_options: { disabled: true } }
                     - author
                     - { property: email, type: email }
                     - text

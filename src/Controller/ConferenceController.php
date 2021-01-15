@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Entity\Conference;
 use App\Repository\CommentRepository;
-use App\Repository\ConferenceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,15 +24,13 @@ class ConferenceController extends AbstractController
     /**
      * @Route("/", name="homepage")
      */
-    public function index(ConferenceRepository $repository): Response
+    public function index(): Response
     {
-        return new Response($this->twig->render('conference/index.html.twig', [
-            'conferences' => $repository->findAll()
-        ]));
+        return new Response($this->twig->render('conference/index.html.twig'));
     }
 
     /**
-     * @Route("/conference/{id}", name="conference")
+     * @Route("/conference/{slug}", name="conference")
      */
     public function show(Request $request, Conference $conference, CommentRepository $repository): Response
     {
