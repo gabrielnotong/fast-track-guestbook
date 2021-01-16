@@ -26,20 +26,20 @@ class Comment
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    private string $author;
+    private ?string $author = null;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      */
-    private string $text;
+    private ?string $text = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Email
      */
-    private string $email;
+    private ?string $email = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -67,7 +67,7 @@ class Comment
         return $this->id;
     }
 
-    public function getAuthor(): string
+    public function getAuthor(): ?string
     {
         return $this->author;
     }
@@ -79,7 +79,7 @@ class Comment
         return $this;
     }
 
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
@@ -91,7 +91,7 @@ class Comment
         return $this;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
