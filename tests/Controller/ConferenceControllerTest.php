@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller;
 
+use App\Repository\CommentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ConferenceControllerTest extends WebTestCase
@@ -24,12 +26,17 @@ class ConferenceControllerTest extends WebTestCase
         $client->submitForm('Submit', [
             'comment_form[author]' => 'Fabien',
             'comment_form[text]' => 'Some feedback from an automated functional test',
-            'comment_form[email]' => 'me@automat.ed',
+            'comment_form[email]' => $email = 'me@automat.ed',
             'comment_form[photo]' => dirname(__DIR__, 2).'/public/images/under-construction.gif',
         ]);
         $this->assertResponseRedirects();
+
+        $comment = self::$container->get(CommentRepository::class)->findByEmail($email);
+        $comment[0]->setState('published');
+        self::$container->get(EntityManagerInterface::class)->flush();
+
         $client->followRedirect();
-        $this->assertSelectorExists('div:contains("There are 2 comments")');
+        $this->assertSelectorExists('div:contains("There are 3 comments")');
     }
 
     public function testConferencePage()
@@ -44,6 +51,6 @@ class ConferenceControllerTest extends WebTestCase
         $this->assertPageTitleContains('Amsterdam');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h2', 'Amsterdam 2019 Conference');
-        $this->assertSelectorExists('div:contains("There are 1 comments")');
+        $this->assertSelectorExists('div:contains("There are 2 comments")');
     }
 }
