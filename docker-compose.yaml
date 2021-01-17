@@ -8,8 +8,18 @@ services:
       POSTGRES_PASSWORD: main
       POSTGRES_DB: main
     ports:
-    - 5432
+    - 49164:5432
   redis:
     image: redis:5-alpine
     ports:
-    - 6379
+    - 6379:6379
+  rabbitmq:
+    image: rabbitmq:3.7-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+    - 5672:5672
+    - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
