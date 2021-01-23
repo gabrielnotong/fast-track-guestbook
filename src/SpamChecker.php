@@ -24,8 +24,6 @@ class SpamChecker
     }
 
     /**
-     * @param Comment $comment
-     * @param array $context
      * @return int Spam score: 0: not spam, 1: maybe spam, 2: blatant spam
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
