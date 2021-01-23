@@ -10,9 +10,21 @@ easy_admin:
     entities:
         Conference:
             class: App\Entity\Conference
+            form:
+                fields:
+                    - city
+                    - year
+                    - isInternational
+                    - { property: slug, type_options: { required: false } }
 
         Comment:
             class: App\Entity\Comment
+            form:
+                fields:
+                    - author
+                    - text
+                    - { property: email, type: email }
+                    - { property: conference }
             list:
                 fields:
                     - author
@@ -22,10 +34,3 @@ easy_admin:
                     - { property: createdAt, type: datetime }
                 sort: ['createdAt', 'DESC']
                 filters: ['conference']
-            edit:
-                fields:
-                    - { property: conference }
-                    - author
-                    - { property: state }
-                    - { property: email, type: email }
-                    - text
