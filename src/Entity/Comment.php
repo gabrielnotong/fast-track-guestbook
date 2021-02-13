@@ -50,12 +50,12 @@ class Comment
      * @ORM\ManyToOne(targetEntity=Conference::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private Conference $conference;
+    private ?Conference $conference = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $photoFilename;
+    private ?string $photoFilename = null;
 
     /**
      * @ORM\Column(type="string", length=255)
