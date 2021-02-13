@@ -37,7 +37,7 @@ class Conference
     /**
      * @ORM\Column(type="boolean")
      */
-    private ?bool $isInternational;
+    private ?bool $isInternational = null;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="conference", orphanRemoval=true)
@@ -143,5 +143,10 @@ class Conference
         if (!$this->slug || '-' === $this->slug) {
             $this->slug = (string)$slugger->slug((string)$this)->lower();
         }
+    }
+
+    public function __sleep(): array
+    {
+        return [];
     }
 }
